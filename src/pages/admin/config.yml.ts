@@ -6,6 +6,7 @@ const config = `backend:
   name: github
   repo: JOMYYYYYY/blog
   branch: master
+  base_url: https://tanyaxing.com/api
 
 publish_mode: editorial_workflow
 
