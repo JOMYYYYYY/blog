@@ -5,7 +5,7 @@ export const prerender = true;
 const token = import.meta.env.DECAP_TOKEN || "";
 
 const config = `backend:
-  name: simple
+  name: github
   repo: JOMYYYYYY/blog
   branch: master${token ? `\n  auth_token: ${token}` : ""}
 
