@@ -2,12 +2,10 @@ import type { APIRoute } from "astro";
 
 export const prerender = true;
 
-const token = import.meta.env.DECAP_TOKEN || "";
-
 const config = `backend:
   name: github
   repo: JOMYYYYYY/blog
-  branch: master${token ? `\n  auth_token: ${token}` : ""}
+  branch: master
 
 publish_mode: editorial_workflow
 
