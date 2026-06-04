@@ -57,6 +57,16 @@ body {
   color: var(--accent);
 }
 
+.nav-link {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--accent);
+}
+
 /* Blog post typography */
 .prose {
   line-height: 1.8;
