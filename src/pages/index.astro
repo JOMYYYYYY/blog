@@ -1,14 +1,33 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 ---
 
 <BaseLayout title="Yaxing Tan">
-  <section style="padding:4rem 0 2rem;">
-    <h1 style="font-size:3rem;font-weight:700;margin-bottom:0.5rem;">Yaxing Tan</h1>
-    <p style="font-size:1.2rem;color:var(--text-secondary);margin-bottom:1.5rem;font-style:italic;">Less is more</p>
-
+  <section style="padding:3rem 0 2rem;">
+    <p style="font-size:1.2rem;color:var(--text-secondary);font-style:italic;margin-bottom:2rem;">Code. Life. Repeat.</p>
   </section>
-  <section style="padding:2rem 0;">
-    <a href="/blog" data-i18n="home.view_posts" style="display:inline-block;padding:0.75rem 2rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:6px;font-weight:500;">浏览文章</a>
+  {posts.length > 0 && (
+    <section>
+      {posts.map(post => {
+        const d = post.data.pubDate;
+        const dd = String(d.getDate()).padStart(2, "0");
+        const mm = String(d.getMonth() + 1).padStart(2, "0");
+        return (
+          <div style="padding:0.75rem 0;border-bottom:1px solid var(--border);">
+            <span style="color:var(--text-secondary);font-size:0.9rem;display:inline-block;width:3rem;">{mm}/{dd}</span>
+            <a href={`/blog/${post.id}/`} style="color:var(--text);text-decoration:none;">{post.data.title}</a>
+          </div>
+        );
+      })}
+    </section>
+  )}
+  <section style="padding:1.5rem 0;">
+    <a href="/blog" data-i18n="home.more" style="color:var(--accent);text-decoration:none;font-size:0.95rem;">所有文章 →</a>
   </section>
 </BaseLayout>
