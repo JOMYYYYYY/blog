@@ -1,7 +1,7 @@
 ---
 title: Test New Blog
 description: Test the blog description.
-pubDate: 2026-06-02
+pubDate: 2026-06-04
 tags:
   - test
 draft: false
