@@ -1,7 +1,13 @@
-backend:
-  name: github
+import type { APIRoute } from "astro";
+
+export const prerender = true;
+
+const token = import.meta.env.DECAP_TOKEN || "";
+
+const config = `backend:
+  name: simple
   repo: JOMYYYYYY/blog
-  branch: master
+  branch: master${token ? `\n  auth_token: ${token}` : ""}
 
 publish_mode: editorial_workflow
 
@@ -27,3 +33,10 @@ collections:
       - { label: Tags, name: tags, widget: list, required: false }
       - { label: Draft, name: draft, widget: boolean, default: false, required: false }
       - { label: Body, name: body, widget: markdown }
+`;
+
+export const GET: APIRoute = () => {
+  return new Response(config, {
+    headers: { "Content-Type": "text/yaml; charset=utf-8" },
+  });
+};
