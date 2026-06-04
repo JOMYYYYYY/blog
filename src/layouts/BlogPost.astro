@@ -31,7 +31,7 @@ const dateStr = `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, "0")}
         )}
       </div>
     </header>
-      <div data-pagefind-meta="tags:{tags.join(',')}"></div>
+      {tags.map(tag => <div data-pagefind-meta={`tags:${tag}`}></div>)}
       <div class="prose">
         <slot />
       </div>
