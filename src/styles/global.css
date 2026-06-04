@@ -47,6 +47,16 @@ body {
   margin-bottom: 2.5rem;
 }
 
+.post-link {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.post-link:hover {
+  color: var(--accent);
+}
+
 /* Blog post typography */
 .prose {
   line-height: 1.8;

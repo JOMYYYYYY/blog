@@ -54,7 +54,7 @@ for (const post of posts) {
               return (
                 <li style="padding:0.2rem 0;">
                   <span style="color:var(--text-secondary);font-size:0.9rem;display:inline-block;width:3rem;">{mm}/{dd}</span>
-                  <a href={`/blog/${post.id}/`} style="color:var(--text);text-decoration:none;">{post.data.title}</a>
+                  <a href={`/blog/${post.id}/`} class="post-link">{post.data.title}</a>
                 </li>
               );
             })}

@@ -19,8 +19,11 @@ const allPosts = (await getCollection("blog"))
 const idx = allPosts.findIndex(p => p.id === post.id);
 const prev = idx < allPosts.length - 1 ? allPosts[idx + 1] : null;
 const next = idx > 0 ? allPosts[idx - 1] : null;
+
+const wordCount = post.body ? post.body.length : 0;
+const readingTime = Math.max(1, Math.ceil(wordCount / 400));
 ---
 
-<BlogPost post={post} prev={prev} next={next}>
+<BlogPost post={post} prev={prev} next={next} readingTime={readingTime}>
   <Content />
 </BlogPost>

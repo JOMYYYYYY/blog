@@ -27,6 +27,11 @@ function applyTranslations() {
       el.textContent = dict[key];
     }
   });
+
+  document.querySelectorAll("[data-i18n-lang]").forEach((el) => {
+    const attr = el.getAttribute("data-i18n-lang");
+    el.setAttribute(attr, lang === "zh" ? "zh-CN" : "en");
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
