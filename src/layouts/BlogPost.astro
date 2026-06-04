@@ -37,7 +37,7 @@ const { title, description, pubDate, tags } = post.data;
       <div>
         {prev && (
           <a href={`/blog/${prev.id}/`} style="text-decoration:none;color:var(--text);">
-            <span style="display:block;font-size:0.8rem;color:var(--text-secondary);">← 上一篇</span>
+            <span style="display:block;font-size:0.8rem;color:var(--text-secondary);" data-i18n="post.prev">← 上一篇</span>
             <span style="font-weight:500;">{prev.data.title}</span>
           </a>
         )}
@@ -45,7 +45,7 @@ const { title, description, pubDate, tags } = post.data;
       <div style="text-align:right;">
         {next && (
           <a href={`/blog/${next.id}/`} style="text-decoration:none;color:var(--text);">
-            <span style="display:block;font-size:0.8rem;color:var(--text-secondary);">下一篇 →</span>
+            <span style="display:block;font-size:0.8rem;color:var(--text-secondary);" data-i18n="post.next">下一篇 →</span>
             <span style="font-weight:500;">{next.data.title}</span>
           </a>
         )}

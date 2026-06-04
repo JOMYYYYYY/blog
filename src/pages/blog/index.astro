@@ -34,16 +34,18 @@ for (const post of posts) {
 ---
 
 <BaseLayout title="Blog - Yaxing Tan">
-  <h1 style="font-size:2rem;margin-bottom:2rem;">所有文章</h1>
+  <h1 style="font-size:2rem;margin-bottom:2rem;" data-i18n="blog.all">所有文章</h1>
   {grouped.length === 0 && (
-    <p style="color:var(--text-secondary);">还没有文章</p>
+    <p style="color:var(--text-secondary);" data-i18n="blog.empty">还没有文章</p>
   )}
   {grouped.map(yearGroup => (
     <section style="margin-bottom:2.5rem;">
       <h2 style="font-size:1.75rem;font-weight:700;margin-bottom:1rem;color:var(--text);">{yearGroup.year}</h2>
       {yearGroup.months.map(monthGroup => (
         <div style="margin-bottom:1rem;">
-          <h3 style="font-size:1rem;font-weight:500;color:var(--text-secondary);margin-bottom:0.5rem;">{monthGroup.month}月</h3>
+          <h3 style="font-size:1rem;font-weight:500;color:var(--text-secondary);margin-bottom:0.5rem;">
+            <span data-i18n={`month.${monthGroup.month}`}>{monthGroup.month}月</span>
+          </h3>
           <ul style="list-style:none;">
             {monthGroup.posts.map(post => {
               const d = post.data.pubDate;
