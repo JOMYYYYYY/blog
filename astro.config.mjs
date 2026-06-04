@@ -4,6 +4,6 @@ import sitemap from "@astrojs/sitemap";
 import pagefind from "astro-pagefind";
 
 export default defineConfig({
-  site: "https://yourdomain.com",
+  site: "https://tanyaxing.com",
   integrations: [mdx(), sitemap(), pagefind()],
 });
