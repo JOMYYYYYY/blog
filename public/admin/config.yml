@@ -1,8 +1,7 @@
 backend:
   name: github
   repo: JOMYYYYYY/blog
-  branch: main
-  base_url: https://api.github.com
+  branch: master
 
 publish_mode: editorial_workflow
 
