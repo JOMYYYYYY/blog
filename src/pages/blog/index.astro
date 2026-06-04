@@ -1,25 +1,64 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+
 const posts = (await getCollection("blog"))
   .filter(p => !p.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+interface MonthGroup {
+  month: number;
+  posts: typeof posts;
+}
+interface YearGroup {
+  year: number;
+  months: MonthGroup[];
+}
+
+const grouped: YearGroup[] = [];
+for (const post of posts) {
+  const year = post.data.pubDate.getFullYear();
+  const month = post.data.pubDate.getMonth() + 1;
+  let yearGroup = grouped.find(g => g.year === year);
+  if (!yearGroup) {
+    yearGroup = { year, months: [] };
+    grouped.push(yearGroup);
+  }
+  let monthGroup = yearGroup.months.find(m => m.month === month);
+  if (!monthGroup) {
+    monthGroup = { month, posts: [] };
+    yearGroup.months.push(monthGroup);
+  }
+  monthGroup.posts.push(post);
+}
 ---
 
-<BaseLayout title="Blog - My Blog">
+<BaseLayout title="Blog - Yaxing Tan">
   <h1 style="font-size:2rem;margin-bottom:2rem;">所有文章</h1>
-  <ul style="list-style:none;">
-    {posts.map(post => (
-      <li style="padding:1.5rem 0;border-bottom:1px solid var(--border);">
-        <a href={`/blog/${post.id}/`} style="text-decoration:none;color:var(--text);">
-          <h3 style="font-size:1.2rem;margin-bottom:0.5rem;color:var(--accent);">{post.data.title}</h3>
-        </a>
-        <p style="color:var(--text-secondary);font-size:0.9rem;">
-          {post.data.pubDate.toLocaleDateString("zh-CN")}
-          {post.data.tags.length > 0 && ` | ${post.data.tags.join(" / ")}`}
-        </p>
-        <p style="color:var(--text-secondary);margin-top:0.3rem;">{post.data.description}</p>
-      </li>
-    ))}
-  </ul>
+  {grouped.length === 0 && (
+    <p style="color:var(--text-secondary);">还没有文章</p>
+  )}
+  {grouped.map(yearGroup => (
+    <section style="margin-bottom:2.5rem;">
+      <h2 style="font-size:1.75rem;font-weight:700;margin-bottom:1rem;color:var(--text);">{yearGroup.year}</h2>
+      {yearGroup.months.map(monthGroup => (
+        <div style="margin-bottom:1rem;">
+          <h3 style="font-size:1rem;font-weight:500;color:var(--text-secondary);margin-bottom:0.5rem;">{monthGroup.month}月</h3>
+          <ul style="list-style:none;">
+            {monthGroup.posts.map(post => {
+              const d = post.data.pubDate;
+              const dd = String(d.getDate()).padStart(2, "0");
+              const mm = String(d.getMonth() + 1).padStart(2, "0");
+              return (
+                <li style="padding:0.2rem 0;">
+                  <span style="color:var(--text-secondary);font-size:0.9rem;display:inline-block;width:3rem;">{mm}/{dd}</span>
+                  <a href={`/blog/${post.id}/`} style="color:var(--text);text-decoration:none;">{post.data.title}</a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))}
+    </section>
+  ))}
 </BaseLayout>

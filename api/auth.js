@@ -1,4 +1,4 @@
-export default async function handler(req) {
+export default async function handler(req, res) {
   const clientId = process.env.OAUTH_CLIENT_ID;
   const redirectUri = process.env.ORIGIN + "/api/callback";
 
@@ -8,7 +8,8 @@ export default async function handler(req) {
     scope: "repo",
   });
 
-  return Response.redirect(
-    `https://github.com/login/oauth/authorize?${params.toString()}`
-  );
+  res.writeHead(302, {
+    Location: `https://github.com/login/oauth/authorize?${params.toString()}`,
+  });
+  res.end();
 }

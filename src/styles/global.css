@@ -5,6 +5,7 @@
   --text-secondary: #666666;
   --accent: #0070f3;
   --border: #eaeaea;
+  --code-bg: #f6f8fa;
 }
 
 [data-theme="dark"] {
@@ -14,6 +15,7 @@
   --text-secondary: #8b949e;
   --accent: #58a6ff;
   --border: #30363d;
+  --code-bg: #161b22;
 }
 
 * {
@@ -34,4 +36,125 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+/* Blog post typography */
+.prose {
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.prose h2 {
+  font-size: 1.5rem;
+  margin: 2rem 0 0.75rem;
+  font-weight: 700;
+}
+
+.prose h3 {
+  font-size: 1.25rem;
+  margin: 1.75rem 0 0.5rem;
+  font-weight: 600;
+}
+
+.prose p {
+  margin-bottom: 1.25rem;
+}
+
+.prose a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.prose a:hover {
+  text-decoration: underline;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.prose blockquote {
+  margin: 1.5rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid var(--accent);
+  background: var(--bg-secondary);
+  border-radius: 0 6px 6px 0;
+  color: var(--text-secondary);
+}
+
+.prose blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.prose pre {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.prose code {
+  font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.prose :not(pre) > code {
+  background: var(--code-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+.prose ul,
+.prose ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.25rem;
+}
+
+.prose ul li {
+  list-style: disc;
+}
+
+.prose ol li {
+  list-style: decimal;
+}
+
+.prose hr {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.prose th,
+.prose td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.prose th {
+  background: var(--bg-secondary);
+  font-weight: 600;
+}
+
+.prose strong {
+  font-weight: 600;
 }

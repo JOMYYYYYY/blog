@@ -1,34 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
-const posts = (await getCollection("blog"))
-  .filter(p => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BaseLayout title="My Blog">
-  <section style="margin-bottom:3rem;">
-    <h1 style="font-size:2.5rem;margin-bottom:0.5rem;">Welcome</h1>
-    <p style="color:var(--text-secondary);font-size:1.1rem;">分享技术、生活和思考</p>
+<BaseLayout title="Yaxing Tan">
+  <section style="padding:4rem 0 2rem;">
+    <h1 style="font-size:3rem;font-weight:700;margin-bottom:0.5rem;">Yaxing Tan</h1>
+    <p style="font-size:1.2rem;color:var(--text-secondary);margin-bottom:1.5rem;font-style:italic;">Less is more</p>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <a href="https://github.com/JOMYYYYYY" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;font-size:0.9rem;">GitHub →</a>
+    </div>
   </section>
-  <section>
-    <h2 style="font-size:1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem;">
-      <span style="display:inline-block;width:4px;height:24px;background:var(--accent);border-radius:2px;"></span>
-      最新文章
-    </h2>
-    {posts.length === 0 && <p style="color:var(--text-secondary);">还没有文章，敬请期待</p>}
-    <ul style="list-style:none;">
-      {posts.map(post => (
-        <li style="padding:1.5rem 0;border-bottom:1px solid var(--border);">
-          <a href={`/blog/${post.id}/`} style="text-decoration:none;color:var(--text);">
-            <h3 style="font-size:1.2rem;margin-bottom:0.5rem;color:var(--accent);">{post.data.title}</h3>
-          </a>
-          <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:0.3rem;">
-            {post.data.pubDate.toLocaleDateString("zh-CN")}
-          </p>
-          <p style="color:var(--text-secondary);">{post.data.description}</p>
-        </li>
-      ))}
-    </ul>
+  <section style="padding:2rem 0;">
+    <a href="/blog" style="display:inline-block;padding:0.75rem 2rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:6px;font-weight:500;">浏览文章</a>
   </section>
 </BaseLayout>
