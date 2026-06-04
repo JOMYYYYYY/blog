@@ -4,7 +4,10 @@ import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blog"))
   .filter(p => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort((a, b) => {
+    const d = b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+    return d !== 0 ? d : b.id.localeCompare(a.id);
+  })
   .slice(0, 3);
 ---
 
