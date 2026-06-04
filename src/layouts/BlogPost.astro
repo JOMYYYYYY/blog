@@ -21,7 +21,7 @@ const dateStr = `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, "0")}
       <h1 style="font-size:2rem;margin-bottom:0.5rem;">{title}</h1>
       <div style="color:var(--text-secondary);font-size:0.9rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
         <time datetime={pubDate.toISOString()}>{dateStr}</time>
-        {readingTime && <span>· {readingTime} 分钟</span>}
+        {readingTime && <span>· {readingTime} <span data-i18n="reading_time">分钟</span></span>}
         {tags.length > 0 && (
           <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
             {tags.map(tag => (
