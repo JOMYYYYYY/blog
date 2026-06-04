@@ -1,0 +1,30 @@
+backend:
+  name: github
+  repo: your-username/your-repo
+  branch: main
+  base_url: https://api.github.com
+
+publish_mode: editorial_workflow
+
+media_folder: public/img
+public_folder: /img
+
+collections:
+  - name: blog
+    label: Blog
+    folder: src/content/blog
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    preview_path: blog/{{slug}}
+    editor:
+      preview: false
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: string }
+      - { label: Publish Date, name: pubDate, widget: datetime, format: "YYYY-MM-DD" }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Draft, name: draft, widget: boolean, default: false, required: false }
+      - { label: Body, name: body, widget: markdown }

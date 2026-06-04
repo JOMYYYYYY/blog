@@ -1,0 +1,50 @@
+---
+import "../styles/global.css";
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <nav class="container" style="display:flex;justify-content:space-between;align-items:center;padding:1rem 20px;">
+      <a href="/" style="text-decoration:none;font-weight:700;color:var(--accent);font-size:1.2rem;">My Blog</a>
+      <div style="display:flex;gap:1rem;align-items:center;">
+        <a href="/" style="text-decoration:none;color:var(--text);">Home</a>
+        <a href="/blog" style="text-decoration:none;color:var(--text);">Blog</a>
+        <a href="/search" style="text-decoration:none;color:var(--text);">搜索</a>
+        <button id="theme-toggle" style="background:none;border:1px solid var(--border);border-radius:6px;padding:4px 10px;cursor:pointer;color:var(--text);font-size:1rem;" aria-label="Toggle theme">🌓</button>
+      </div>
+    </nav>
+    <main class="container" style="min-height:calc(100vh - 160px);padding-top:2rem;padding-bottom:2rem;">
+      <slot />
+    </main>
+    <footer class="container" style="text-align:center;padding:2rem 20px;color:var(--text-secondary);font-size:0.9rem;border-top:1px solid var(--border);">
+      &copy; {new Date().getFullYear()} My Blog. All rights reserved.
+    </footer>
+    <script>
+      const toggle = document.getElementById("theme-toggle");
+      const html = document.documentElement;
+      const saved = localStorage.getItem("theme");
+      if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        html.setAttribute("data-theme", "dark");
+      }
+      toggle?.addEventListener("click", () => {
+        const current = html.getAttribute("data-theme");
+        const next = current === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      });
+    </script>
+  </body>
+</html>

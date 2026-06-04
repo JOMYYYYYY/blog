@@ -1,0 +1,34 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Giscus from "../components/Giscus.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+const { post } = Astro.props;
+const { title, description, pubDate, tags } = post.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <article>
+    <header style="margin-bottom:2rem;">
+      <h1 style="font-size:2rem;margin-bottom:0.5rem;">{title}</h1>
+      <div style="color:var(--text-secondary);font-size:0.9rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+        <time datetime={pubDate.toISOString()}>{pubDate.toLocaleDateString("zh-CN")}</time>
+        {tags.length > 0 && (
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+            {tags.map(tag => (
+              <span style="background:var(--bg-secondary);padding:2px 8px;border-radius:4px;font-size:0.8rem;">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+    <div style="line-height:1.8;">
+      <slot />
+    </div>
+  </article>
+  <hr style="margin:3rem 0;border:none;border-top:1px solid var(--border);" />
+  <Giscus />
+</BaseLayout>

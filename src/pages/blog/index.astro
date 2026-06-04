@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+const posts = (await getCollection("blog"))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Blog - My Blog">
+  <h1 style="font-size:2rem;margin-bottom:2rem;">所有文章</h1>
+  <ul style="list-style:none;">
+    {posts.map(post => (
+      <li style="padding:1.5rem 0;border-bottom:1px solid var(--border);">
+        <a href={`/blog/${post.id}/`} style="text-decoration:none;color:var(--text);">
+          <h3 style="font-size:1.2rem;margin-bottom:0.5rem;color:var(--accent);">{post.data.title}</h3>
+        </a>
+        <p style="color:var(--text-secondary);font-size:0.9rem;">
+          {post.data.pubDate.toLocaleDateString("zh-CN")}
+          {post.data.tags.length > 0 && ` | ${post.data.tags.join(" / ")}`}
+        </p>
+        <p style="color:var(--text-secondary);margin-top:0.3rem;">{post.data.description}</p>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

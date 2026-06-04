@@ -1,0 +1,32 @@
+---
+// 在 https://giscus.app 配置后替换以下值
+const repo = "username/repo";
+const repoId = "";
+const category = "Announcements";
+const categoryId = "";
+---
+
+{repo !== "username/repo" && (
+  <section>
+    <h3 style="margin-bottom:1rem;">评论</h3>
+    <script
+      src="https://giscus.app/client.js"
+      data-repo={repo}
+      data-repo-id={repoId}
+      data-category={category}
+      data-category-id={categoryId}
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async
+    >
+    </script>
+    <noscript>请启用 JavaScript 来查看评论。</noscript>
+  </section>
+)}
