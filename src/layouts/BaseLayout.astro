@@ -30,8 +30,9 @@ const { title, description } = Astro.props;
     <main class="container" style="min-height:calc(100vh - 160px);padding-top:2rem;padding-bottom:2rem;">
       <slot />
     </main>
-    <footer class="container" style="text-align:center;padding:2rem 20px;color:var(--text-secondary);font-size:0.9rem;border-top:1px solid var(--border);">
-      &copy; {new Date().getFullYear()} Yaxing Tan
+    <footer class="container" style="display:flex;justify-content:center;align-items:center;gap:1.5rem;padding:2rem 20px;color:var(--text-secondary);font-size:0.9rem;border-top:1px solid var(--border);">
+      <span>&copy; {new Date().getFullYear()} Yaxing Tan</span>
+      <a href="https://github.com/JOMYYYYYY" target="_blank" rel="noopener noreferrer" style="color:var(--text-secondary);text-decoration:none;">GitHub</a>
     </footer>
     <script>
       import "../i18n/i18n.js";
