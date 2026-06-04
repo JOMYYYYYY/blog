@@ -29,7 +29,11 @@ collections:
       - { label: Title, name: title, widget: string }
       - { label: Description, name: description, widget: string }
       - { label: Publish Date, name: pubDate, widget: datetime, format: "YYYY-MM-DD" }
-      - { label: Tags, name: tags, widget: list, required: false }
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+        field: { label: 添加标签, name: tag, widget: string }
       - { label: Draft, name: draft, widget: boolean, default: false, required: false }
       - { label: Body, name: body, widget: markdown }
 `;
