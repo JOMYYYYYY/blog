@@ -33,10 +33,15 @@ export default async function handler(req, res) {
   res.end(`<!DOCTYPE html>
 <html><body><script>
 (function() {
-  window.opener.postMessage(
-    ${JSON.stringify({ token: data.access_token, provider: "github" })},
-    window.location.origin
-  );
+  window.addEventListener("message", function(e) {
+    if (e.data === "authorizing:github") {
+      window.opener.postMessage(
+        "authorization:github:success:${JSON.stringify({ provider: "github", token: data.access_token })}",
+        e.origin
+      );
+    }
+  });
+  window.opener.postMessage("authorizing:github", "*");
 })();
 </script></body></html>`);
 }
