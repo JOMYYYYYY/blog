@@ -1,5 +1,6 @@
 ---
 title: Test New Blog
+slug: test-new-blog
 description: Test the blog description.
 pubDate: 2026-06-04
 tags:

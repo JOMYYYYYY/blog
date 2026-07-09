@@ -6,12 +6,14 @@ const blog = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
   schema: z.object({
     title: z.string(),
+    slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
     description: z.string(),
     pubDate: z.date(),
     updatedDate: z.date().optional(),
     heroImage: z.string().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    legacySlugs: z.array(z.string()).default([]),
   }),
 });
 

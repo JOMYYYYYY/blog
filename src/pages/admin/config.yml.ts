@@ -27,8 +27,15 @@ collections:
       preview: false
     fields:
       - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only"] }
       - { label: Description, name: description, widget: string }
       - { label: Publish Date, name: pubDate, widget: datetime, format: "YYYY-MM-DD" }
+      - label: Legacy Slugs
+        name: legacySlugs
+        widget: list
+        required: false
+        hint: Old URLs that should redirect to this post, without /blog/.
+        field: { label: Legacy Slug, name: legacySlug, widget: string }
       - label: Tags
         name: tags
         widget: list

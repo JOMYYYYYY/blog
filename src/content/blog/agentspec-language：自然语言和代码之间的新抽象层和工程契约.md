@@ -1,7 +1,10 @@
 ---
 title: AgentSpec Language：自然语言和代码之间的新抽象层和工程契约
+slug: agentspec-language
 description: AI agent 时代，自然语言意图和底层代码之间，缺少一个稳定、可追踪、可验证、可同步的中间层。
 pubDate: 2026-06-26
+legacySlugs:
+  - agentspec-language自然语言和代码之间的新抽象层和工程契约
 tags:
   - AI Agent
   - SDD

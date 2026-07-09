@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import Giscus from "../components/Giscus.astro";
+import { getPostHref } from "../lib/posts";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -41,7 +42,7 @@ const dateStr = `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, "0")}
     <nav style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);">
       <div>
         {prev && (
-          <a href={`/blog/${prev.id}/`} style="text-decoration:none;color:var(--text);">
+          <a href={getPostHref(prev)} style="text-decoration:none;color:var(--text);">
             <span style="display:block;font-size:0.8rem;color:var(--text-secondary);" data-i18n="post.prev">← 上一篇</span>
             <span style="font-weight:500;">{prev.data.title}</span>
           </a>
@@ -49,7 +50,7 @@ const dateStr = `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, "0")}
       </div>
       <div style="text-align:right;">
         {next && (
-          <a href={`/blog/${next.id}/`} style="text-decoration:none;color:var(--text);">
+          <a href={getPostHref(next)} style="text-decoration:none;color:var(--text);">
             <span style="display:block;font-size:0.8rem;color:var(--text-secondary);" data-i18n="post.next">下一篇 →</span>
             <span style="font-weight:500;">{next.data.title}</span>
           </a>

@@ -1,14 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { assertValidPostSlugs, getPostHref, getPublishedPosts } from "../lib/posts";
 
-const posts = (await getCollection("blog"))
-  .filter(p => !p.data.draft)
-  .sort((a, b) => {
-    const d = b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
-    return d !== 0 ? d : b.id.localeCompare(a.id);
-  })
-  .slice(0, 3);
+const allPosts = await getCollection("blog");
+assertValidPostSlugs(allPosts);
+const posts = getPublishedPosts(allPosts).slice(0, 3);
 ---
 
 <BaseLayout title="Yaxing Tan">
@@ -24,7 +21,7 @@ const posts = (await getCollection("blog"))
         return (
           <div style="padding:0.75rem 0;border-bottom:1px solid var(--border);">
             <span style="color:var(--text-secondary);font-size:0.9rem;display:inline-block;width:3rem;">{mm}/{dd}</span>
-            <a href={`/blog/${post.id}/`} class="post-link">{post.data.title}</a>
+            <a href={getPostHref(post)} class="post-link">{post.data.title}</a>
           </div>
         );
       })}
